@@ -1,0 +1,4 @@
+LIBRARY "NEngine"
+EXPORTS
+	NEngine_register_cui
+	NEngine_cui_information

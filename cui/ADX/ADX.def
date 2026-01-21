@@ -1,0 +1,4 @@
+LIBRARY "ADX"
+EXPORTS
+	ADX_register_cui
+	ADX_cui_information

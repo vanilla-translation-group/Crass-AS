@@ -1,0 +1,4 @@
+LIBRARY   "AnimeGameSystem"   
+  EXPORTS     
+      AnimeGameSystem_register_cui     @2 
+	  AnimeGameSystem_cui_information  @1 

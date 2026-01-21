@@ -1,0 +1,4 @@
+LIBRARY "E_G_O"
+EXPORTS
+	E_G_O_register_cui
+	E_G_O_cui_information

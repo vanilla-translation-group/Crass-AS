@@ -1,0 +1,4 @@
+LIBRARY "TCD"
+EXPORTS
+	TCD_register_cui
+	TCD_cui_information

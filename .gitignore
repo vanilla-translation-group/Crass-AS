@@ -1,0 +1,13 @@
+*.dsp
+*.dsw
+*.ncb
+*.opt
+*.plg
+*.zip
+
+Debug/
+Release/
+build/
+lib/
+
+common/GLS3/include/

@@ -1,0 +1,4 @@
+LIBRARY "Overture"
+EXPORTS
+	Overture_register_cui
+	Overture_cui_information
