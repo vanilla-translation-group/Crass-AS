@@ -1,0 +1,4 @@
+LIBRARY "DanceMixer"
+EXPORTS
+	DanceMixer_register_cui
+	DanceMixer_cui_information
