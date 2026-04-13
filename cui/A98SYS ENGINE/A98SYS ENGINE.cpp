@@ -516,7 +516,7 @@ static int A98SYS_ENGINE_edt_match(struct package *pkg)
 		return -CUI_EREAD;
 	}
 
-	if (strncmp(header.magic, ".TRUE峕屗", 10)) {
+	if (strncmp(header.magic, ".TRUE\x8D\x5D\x8C\xCB", 10)) {
 		pkg->pio->close(pkg);
 		return -CUI_EMATCH;	
 	}
@@ -810,7 +810,7 @@ static int A98SYS_ENGINE_ed8_match(struct package *pkg)
 		return -CUI_EREAD;
 	}
 
-	if (strncmp(header.magic, ".8Bit峕屗", 10)) {
+	if (strncmp(header.magic, ".8Bit\x8D\x5D\x8C\xCB", 10)) {
 		pkg->pio->close(pkg);
 		return -CUI_EMATCH;	
 	}

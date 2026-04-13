@@ -1253,7 +1253,7 @@ static int ExHIBIT_rld_extract_resource(struct package *pkg,
 		return -CUI_EREADVEC;
 	}
 
-	char *string = "PrimaryPrimary丂乣Magical仛Trouble仛Scramble乣丂TRIAL80060020482566144100225253380048000400100";
+	char *string = "PrimaryPrimary\x81\x40\x81\x60Magical\x81\x9ATrouble\x81\x9AScramble\x81\x60\x81\x40TRIAL80060020482566144100225253380048000400100";
 	BYTE code[4] = { 0, 0, 0, 0 };
 	BYTE chr;
 	while ((chr = *string++)) {

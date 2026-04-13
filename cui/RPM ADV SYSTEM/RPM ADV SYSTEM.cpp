@@ -449,7 +449,7 @@ static int RPM_ADV_SYSTEM_arc_extract_resource(struct package *pkg,
 	}
 
 	if (strstr(pkg_res->name, ".lib")) {
-		const char *key = "偰偡偲";	// てすと
+		const char *key = "\x82\xC4\x82\xB7\x82\xC6";	// てすと
 
 		for (DWORD i = 0, k = 0; i < actlen; i++) {
 			actdata[i] -= key[k++];

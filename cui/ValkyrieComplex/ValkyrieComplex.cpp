@@ -368,9 +368,9 @@ static int ValkyrieComplex_pak_match(struct package *pkg)
 	}
 
 	int is_retail;
-	if (!strcmp(header.magic, "倁俠懱尡斉"))
+	if (!strcmp(header.magic, "\x82\x75\x82\x62\x91\xCC\x8C\xB1\x94\xC5"))
 		is_retail = 0;
-	else if (!strcmp(header.magic, "倁俠惢昳斉"))
+	else if (!strcmp(header.magic, "\x82\x75\x82\x62\x90\xBB\x95\x69\x94\xC5"))
 		is_retail = 1;
 	else {
 		pkg->pio->close(pkg);

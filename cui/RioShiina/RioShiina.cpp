@@ -193,7 +193,7 @@ static DWORD inline warc_max_index_length(unsigned long WARC_version)
 static char WARC_key[MAX_PATH];
 static inline const char *WARC_key_string(DWORD WARC_version)
 {
-	const char *key = "Crypt Type %s - Copyright(C) 2000 Y.Yamada/STUDIO 傛偟偔傫";
+	const char *key = "Crypt Type %s - Copyright(C) 2000 Y.Yamada/STUDIO \x82\xE6\x82\xB5\x82\xAD\x82\xF1";
 
 	if (WARC_version <= 120)
 		sprintf(WARC_key, key, "20000823");
