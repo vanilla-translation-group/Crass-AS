@@ -22,17 +22,9 @@ cd 到 build-VS2022-MT 文件夹中，执行 `msbuild openssl1_0.sln /p:Configur
 
 基本同上。
 
-### GLS3
-
-EntisGLS 插件的特殊依赖。
-
-由于协议原因，无法直接分发包括头文件在内的库本身，请使用 `common/GLS3/setup.sh` 来下载相关文件。
-
-需将 `Cotopha/Library/win32/vs2019/gls.lib` 拷贝到 common/lib 下。
-
 ## 编译
 
 ```
 > cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCRASS_VERSION=0.5.0.0 .
-> nmake
+> cmake --build . # --target cui_xxx # 可选，编译单个插件而非全量编译
 ```

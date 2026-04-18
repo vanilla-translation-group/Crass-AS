@@ -11,7 +11,16 @@
 #include <utility.h>
 #include <vector>
 #include <string>
+
+#define ENTIS_USE_UNOFFICIAL_IMPL
+
+#ifndef ENTIS_USE_UNOFFICIAL_IMPL
 #include <xerisa.h>
+#else
+#include "dec/bshf_decoder.h"
+#include "dec/erisan_decoder.h"
+#include "dec/types.h"
+#endif
 
 /* 
 【game参数游戏支持列表】
@@ -170,9 +179,9 @@ struct acui_information EntisGLS_cui_information = {
 	_T("Leshade Entis, Entis-soft."),	/* copyright */
 	_T("Entis Generalized Library Set version 3"),	/* system */
 	_T(".noa .dat .arc"),	/* package */
-	_T("0.5.0"),			/* revision */
+	_T("0.5.1"),			/* revision */
 	_T("痴漢公賊"),			/* author */
-	_T("2009-5-2 17:08"),	/* date */
+	_T("2026-4-18 14:03"),	/* date */
 	NULL,					/* notion */
 	ACUI_ATTRIBUTE_LEVEL_DEVELOP
 };
@@ -503,14 +512,22 @@ out:
 static int ERIBSHFDecode(BYTE *dec, DWORD dec_len, 
 						 BYTE *enc, DWORD enc_len, char *pwd)
 {
+#ifdef ENTIS_USE_UNOFFICIAL_IMPL
+	au::dec::entis::common::BshfDecoder decoder(au::bstr(pwd, strlen(pwd)));
+	decoder.set_input(au::bstr(enc, enc_len));
+	decoder.reset();
+	decoder.decode(dec, dec_len);
+
+	return dec_len;
+#else
 	EMemoryFile DEC;
 	DEC.Open(enc, enc_len);
-
+ 
 	ESLFileObject *file = DEC.Duplicate();
 	ERISADecodeContext BSHF(dec_len);
 	BSHF.AttachInputFile(file);
 	BSHF.PrepareToDecodeBSHFCode(pwd);
-
+ 
 	EStreamBuffer buf;
 	BYTE *ptrBuf = (BYTE *)buf.PutBuffer(dec_len);
 	int ret = BSHF.DecodeBSHFCodeBytes((SBYTE *)ptrBuf, dec_len);
@@ -519,7 +536,9 @@ static int ERIBSHFDecode(BYTE *dec, DWORD dec_len,
 	delete file;
 
 	return ret;
+#endif
 }
+
 #else
 static int ERIBshfDecode(BYTE *BSHF_dst, DWORD BSHF_dst_len, 
 						 BYTE *BSHF_src, DWORD BSHF_src_len)
@@ -626,6 +645,7 @@ static int load_exe_xml(const char *exe_file)
 			if (hsrc) {
 				LPVOID cipher = LockResource(hsrc); 
 				if (cipher) {
+#ifndef ENTIS_USE_UNOFFICIAL_IMPL
 					EMemoryFile xml;
 					xml.Open(cipher, sz);
 					ERISADecodeContext ERISA(0x10000);
@@ -635,10 +655,23 @@ static int load_exe_xml(const char *exe_file)
 					EStreamBuffer buf;
 					BYTE *ptrBuf = (BYTE *)buf.PutBuffer(0x10000);
 					unsigned int Result = ERISA.DecodeERISANCodeBytes((SBYTE *)ptrBuf, 0x10000);
+#else
+					unsigned int Result = 0x10000;
+					BYTE *ptrBuf = new BYTE[0x10000];
+					au::dec::entis::common::ErisaNDecoder decoder;
+					decoder.set_input(au::bstr((au::u8*)cipher, sz));
+					decoder.reset();
+					decoder.decode(ptrBuf, Result);
+#endif
 					if (debug)
 						MySaveFile(_T("exe.xml"), ptrBuf, Result);
 					parse_xml_data((char *)ptrBuf);
-					delete dup;
+					delete
+#ifndef ENTIS_USE_UNOFFICIAL_IMPL
+						dup;
+#else
+						ptrBuf;
+#endif
 					return runtime_game_key_table.size();
 				}
 				FreeResource(hsrc);
@@ -855,6 +888,7 @@ static int EntisGLS_noa_extract_resource(struct package *pkg,
 	if (my_noa_entry->encode_type == 0x00000000)	// etRaw
 		pkg_res->raw_data = raw;
 	else if (my_noa_entry->encode_type == 0x80000010) {	// etERISACode
+#ifndef ENTIS_USE_UNOFFICIAL_IMPL
 		EMemoryFile dec;
 		dec.Open(raw, pkg_res->raw_data_length);
 		ERISADecodeContext ERISA(pkg_res->actual_data_length);
@@ -866,13 +900,21 @@ static int EntisGLS_noa_extract_resource(struct package *pkg,
 		BYTE *ptrBuf = (BYTE *)buf.PutBuffer(pkg_res->actual_data_length);
 		pkg_res->actual_data_length = ERISA.DecodeERISANCodeBytes((SBYTE *)ptrBuf, 
 			pkg_res->actual_data_length);
+#endif
 		BYTE *act = new BYTE[pkg_res->actual_data_length];
 		if (!act) {
 			delete [] raw;
 			return -CUI_EMEM;
 		}
+#ifndef ENTIS_USE_UNOFFICIAL_IMPL
 		memcpy(act, ptrBuf, pkg_res->actual_data_length);
 		delete dup;
+#else
+		au::dec::entis::common::ErisaNDecoder decoder;
+		decoder.set_input(au::bstr(raw, pkg_res->raw_data_length));
+		decoder.reset();
+		decoder.decode(act, pkg_res->actual_data_length);
+#endif
 		pkg_res->raw_data = raw;
 		pkg_res->actual_data = act;
 	} else if (my_noa_entry->encode_type == 0x40000000) {	// etBSHFCrypt

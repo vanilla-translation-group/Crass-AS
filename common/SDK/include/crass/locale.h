@@ -1,6 +1,8 @@
 #ifndef LOCALE_H
 #define LOCALE_H
 
+#include "../wincompat.h"
+
 #ifdef LOCALE_EXPORTS
 #define LOCALE_API __declspec(dllexport)
 #else

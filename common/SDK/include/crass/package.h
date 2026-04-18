@@ -1,6 +1,7 @@
 #ifndef PACKAGE_H
 #define PACKAGE_H
 	
+#include "../wincompat.h"
 	
 struct package_directory_entry_operation {
 	

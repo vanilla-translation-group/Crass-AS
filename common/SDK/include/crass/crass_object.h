@@ -1,6 +1,8 @@
 #ifndef CRASS_OBJECT
 #define CRASS_OBJECT
 
+#include "../wincompat.h"
+
 struct crass_object {
 	const TCHAR *name;
 	unsigned int name_length;

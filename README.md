@@ -20,4 +20,4 @@ You should have received a copy of the GNU General Public License along with thi
 
 Additional permission under GNU GPL version 3 section 7
 
-If you modify this program, or any covered work, by linking or combining it with the GLS3 library and/or the OpenSSL project's OpenSSL library (including modified version of that library), the licensors of this program grants you additional permission to convey the resulting work.
+If you modify this program, or any covered work, by linking or combining it with the OpenSSL project's OpenSSL library (including modified version of that library), the licensors of this program grants you additional permission to convey the resulting work.

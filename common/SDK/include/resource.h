@@ -1,6 +1,7 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
+#include "wincompat.h"
 #include <crass_types.h>
 #include <crass/io_request.h>
 #include <package.h>

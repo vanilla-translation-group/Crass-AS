@@ -1,6 +1,8 @@
 #ifndef ACUI_H
 #define ACUI_H
 
+#include "wincompat.h"
+
 /* aui/cui导出信息 */
 struct acui_information {
 	const TCHAR *copyright;	/* 封包系统的版权描述信息 */

@@ -1,6 +1,8 @@
 #ifndef IO_REQUEST_H
 #define IO_REQUEST_H
 
+#include "../wincompat.h"
+
 #ifdef IO_REQUEST_EXPORTS
 #define IO_REQUEST_API __declspec(dllexport)
 #else

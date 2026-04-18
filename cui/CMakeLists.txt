@@ -17,9 +17,7 @@ endforeach ()
 
 # extra dependencies
 
-target_include_directories(cui_EntisGLS PRIVATE ${CMAKE_SOURCE_DIR}/common/GLS3/include)
 target_link_libraries(cui_EntisGLS comctl32 winmm)
-target_link_libraries(cui_EntisGLS gls)
 
 target_link_libraries(cui_Lucifen package_core)
 

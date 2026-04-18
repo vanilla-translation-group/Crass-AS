@@ -1,6 +1,7 @@
 #ifndef AUI_H
 #define AUI_H
 
+#include "wincompat.h"
 #include "acui.h"
 
 struct aui_register_callback;

@@ -1,6 +1,8 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include "wincompat.h"
+
 #ifdef UTILITY_EXPORTS
 #define UTILITY_API __declspec(dllexport)
 #else

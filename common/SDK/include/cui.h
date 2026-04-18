@@ -1,6 +1,8 @@
 #ifndef CUI_H
 #define CUI_H
 
+#include "wincompat.h"
+
 struct cui_register_callback;
 
 /* cui必须暴露的API原型 */

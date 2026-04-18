@@ -1,6 +1,7 @@
 #ifndef PACKAGE_H
 #define PACKAGE_H
 
+#include "wincompat.h"
 #include <crass_types.h>
 #include <crass/io_request.h>
 

@@ -1,6 +1,8 @@
 #ifndef CRASS_H
 #define CRASS_H
 
+#include "../wincompat.h"
+
 #ifdef CRASS_EXPORTS
 #define CRASS_API __declspec(dllexport)
 #else
