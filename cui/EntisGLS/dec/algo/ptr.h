@@ -124,7 +124,7 @@ namespace algo {
         {
             if (left() < n)
             {
-                wcprintf(_T("BadDataSizeError"));
+                wcprintf_error(_T("BadDataSizeError"));
                 exit(1);
             }
             while (n--)
@@ -143,12 +143,12 @@ namespace algo {
         {
             if (n > input_ptr.left())
             {
-                wcprintf(_T("BadDataSizeError"));
+                wcprintf_error(_T("BadDataSizeError"));
                 exit(1);
             }
             if (!cyclic && n > left())
             {
-                wcprintf(_T("BadDataSizeError"));
+                wcprintf_error(_T("BadDataSizeError"));
                 exit(1);
             }
             while (n--)
@@ -162,7 +162,7 @@ namespace algo {
         {
             if (!cyclic && n > left())
             {
-                wcprintf(_T("BadDataSizeError"));
+                wcprintf_error(_T("BadDataSizeError"));
                 exit(1);
             }
             while (n--)
@@ -185,17 +185,17 @@ namespace algo {
             {
                 if (static_cast<int>(pos() + relative_position) < 0)
                 {
-                    wcprintf(_T("BadDataOffsetError"));
+                    wcprintf_error(_T("BadDataOffsetError"));
                     exit(1);
                 }
                 if (pos() + relative_position + n > size())
                 {
-                    wcprintf(_T("BadDataOffsetError"));
+                    wcprintf_error(_T("BadDataOffsetError"));
                     exit(1);
                 }
                 if (n > left())
                 {
-                    wcprintf(_T("BadDataSizeError"));
+                    wcprintf_error(_T("BadDataSizeError"));
                     exit(1);
                 }
             }

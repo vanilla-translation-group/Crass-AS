@@ -67,7 +67,7 @@ void MemoryByteStream::seek_impl(const uoff_t offset)
 {
     if (offset > buffer->size())
     {
-        wcprintf(_T("EofError"));
+        wcprintf_error(_T("EofError"));
         exit(1);
     }
     buffer_pos = offset;
@@ -78,7 +78,7 @@ void MemoryByteStream::read_impl(void *destination, const size_t size)
     // destination MUST exist and size MUST be at least 1
     if (buffer_pos + size > buffer->size())
     {
-        wcprintf(_T("EofError"));
+        wcprintf_error(_T("EofError"));
         exit(1);
     }
     auto source_ptr = buffer->get<const u8>() + buffer_pos;
